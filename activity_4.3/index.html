@@ -19,7 +19,7 @@
     
     
     <script>
-        let apiEndpoint = "https://data.cityofchicago.org/resource/xzkq-xp2w.json?$LIMIT=5";
+        let apiEndpoint = "https://data.cityofchicago.org/resource/xzkq-xp2w.json?$LIMIT=100";
         
         fetch(apiEndpoint)
         .then(response=>{return response.json()})
@@ -33,8 +33,12 @@
             var itm = document.getElementById("tmp");
             var cln=itm.cloneNode(true);
             cln.classList.remove("template");
-            var title = document.
-            /*
+            var text = document.createTextNode(val["name"]+",  "+val["department"]+",  "+val["annual_salary"]);
+
+            
+            cln.appendChild(text);
+            
+            
             /*var cln = itm[0].cloneNode(true);
             cln.classList.remove("template");*/
             document.body.appendChild(cln);
