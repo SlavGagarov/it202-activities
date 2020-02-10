@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Activity 4.3</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>    
+    <script>
+        let apiEndpoint = "https://api.nasa.gov/planetary/apod?api_key=nRaCtjQb6oezWMj3TDFRnZ0BriffYQHWdG3PCtme";
+        
+        fetch(apiEndpoint)
+        .then(response=>{return response.json()})
+        .then(json=>{console.log(json);
+            var h = document.createElement("H1");               
+            h.textContent=json.title;     
+            document.body.appendChild(h);
+                     
+            var parDate = document.createElement("P");
+            parDate.textContent=json.date;
+                
+                     
+            var parExplain = document.createElement("P");
+            parExplain.textContent=json.explanation;
+                     
+            var image = document.createElement("IMG");
+            image.src=json.hdurl;
+            const width = 900;
+            const height = 700;
+            image.width = width;
+            image.height = height;
+                    
+            document.body.appendChild(image);  
+            document.body.appendChild(parDate);
+            document.body.appendChild(parExplain); 
+        })
+        .catch(err=>alert(err))
+
+    </script>
+</body>
+
+</html>
