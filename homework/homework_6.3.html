@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head><title>HW 6.3</title></head>
+    <body>
+        <canvas id="canvas-demo" width="400" height="400">
+             This will be displayed if your browser doesn't
+             support the canvas element. The closing tag is
+             necessary.
+        </canvas>
+        <script>
+            var canvas = document.getElementById("canvas-demo");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = "green"; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            function drawS()
+            {
+                ctx.font = "italic 100px Arial";
+                ctx.fillStyle = "red";
+                ctx.fillText("S", 50, 150);
+
+            }
+            drawS();
+            
+            function drawUIN()
+            {
+                ctx.font = "40px Arial";
+                ctx.fillText("662454208", 50,350);
+            }
+            drawUIN();
+            
+            function drawShape()
+            {
+                ctx.fillStyle="blue";
+                ctx.fillRect(300, 100, 50, 50);
+            }
+            drawShape();
+            
+            
+        </script>
+    </body>
+</html>
