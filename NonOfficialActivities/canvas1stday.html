@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head><title>circle</title></head>
+    <body>
+        <canvas id="canvas" width="1000" height="920">
+        </canvas>
+        <script>
+            let player={x:100, y:100, radius:10}
+            
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle="cyan";
+            ctx.arc(100,100,50,0,Math.PI*2,"counterclockwise");
+            ctx.fill();
+            ctx.strokeStyle="black";
+            ctx.lineWidth=5;
+            ctx.stroke();
+            
+            const draw = () => {
+                ctx.beginPath();
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                player.x += 100;
+                player.y += 100;
+                player.radius +=1;
+                
+                if(player.radius>200)
+                    player.radius=1;
+                if(player.x>canvas.width+player.radius)
+                    player.x =-player.radius;
+                if(player.y>canvas.height+player.radius)
+                    player.y=-player.radius;
+                
+                ctx.fillStyle=getRndColor();
+                ctx.arc(player.x,player.y,player.radius,0,Math.PI*2,"counterclockwise");
+                ctx.closePath();  
+                ctx.fill();
+                ctx.stroke();
+                window.requestAnimationFrame(draw);
+            }
+            draw();
+            
+           function getRndColor() {
+            var r = 255*Math.random()|0,
+                g = 255*Math.random()|0,
+                b = 255*Math.random()|0;
+            return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+        </script>
+    </body>
+</html>
