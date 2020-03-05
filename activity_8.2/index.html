@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script src="script.js"></script>
+
+    <script>
+
+
+        function initMap() {
+            let tmp = {lat: 41.8698, lng: -87.6496};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: tmp
+            });
+            
+            for(let val of inspection_data){
+
+                console.log(val);
+                tmp.lat = parseFloat(val.latitude);
+                tmp.lng = parseFloat(val.longitude);
+               let str =
+                  '<p>'+val.dba_name+'</p>'+
+                  '<p>'+val.facility_type+'</p>'+
+                  '<p>'+val.address+'</p>'+
+                  '<p>'+val.inspection_date.split("-",2)+'</p>'+
+                  '<p>'+val.results+'</p>';
+
+               let infowindow = new google.maps.InfoWindow({
+                content: str,
+              });
+
+                let marker = new google.maps.Marker({
+                position: tmp,
+                map: map,
+                title: val.dba_name
+              });
+
+              marker.addListener('click', function() {
+                infowindow.open(map, marker);
+              });
+            }
+        }
+      </script>
+      
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuKl4Yf1y914WTZjzYLyHQfZkq2rhqXjc&callback=initMap"
+    async defer></script>
+  </body>
+</html>
