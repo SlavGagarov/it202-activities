@@ -23,12 +23,10 @@
     <script src="script.js"></script>
 
     <script>
-
-
-        function initMap() {
+        initMap = () => {
             let tmp = {lat: 41.8698, lng: -87.6496};
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
+            let map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
                 center: tmp
             });
             
@@ -54,7 +52,7 @@
                 title: val.dba_name
               });
 
-              marker.addListener('click', function() {
+              marker.addListener('click', ()=> {
                 infowindow.open(map, marker);
               });
             }
