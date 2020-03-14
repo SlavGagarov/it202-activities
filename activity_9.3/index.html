@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Activity 9.3</title>
+    
+  <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+  <style>
+      .template{
+          display: none;
+      }
+    </style>
+</head>
+
+<body>
+        <button id="GRAF" class="mdc-button foo-button mdc-button--raised	">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">GRAF</span>
+        </button>
+    
+        <button id="SFD" class="mdc-button foo-button mdc-button--raised	">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">CFD</span>
+        </button> 
+    
+        <button id="CSF" class="mdc-button foo-button mdc-button--raised	">
+          <div class="mdc-button__ripple"></div>
+          <span class="mdc-button__label">CSF</span>
+        </button>
+    
+        <div id="data">
+            <ul class="mdc-list mdc-list--two-line">
+            </ul>
+        </div>
+    
+<li class="template mdc-list-item mdc-ripple-upgraded" id="6b559682-cce6-4d3f-9cf1-078da0dd1710" tabindex="-1">
+    <span class="mdc-list-item__graphic material-icons" aria-hidden="true">folder</span>
+    <span class="mdc-list-item__text">
+        <span class="mdc-list-item__primary-text">Cat Photos</span>
+        <span class="mdc-list-item__secondary-text">22 Dec 2017</span>
+    </span>
+    <span class="mdc-list-item__meta material-icons" aria-hidden="true">info</span>
+    </li>
+    
+        <script>
+
+            const categoryIcons = {"GRAF":"label", "SFD":"face", "CSF":"favorite"};
+            const apiEndpoint = "https://data.cityofchicago.org/resource/v6vf-nfxy.json?";
+            
+            document.querySelectorAll('.mdc-button').forEach(node => {
+              node.addEventListener('click', (e)=> {
+                  let categoryCode = node.id;
+                  let url = apiEndpoint + "sr_short_code=" + categoryCode;
+                  
+                  let dataList = document.querySelector("div#data ul.mdc-list");
+                  fetch(url).then((response) => {
+                      return response.json();
+                  })
+                  .then ((json) => {
+                      while (dataList.firstChild) {
+                          dataList.removeChild(dataList.firstChild);
+                        }
+                      for (let record of json){
+                          let clone = document.querySelector("li.template").cloneNode(true);
+                          
+                          clone.classList.remove("template");
+                          
+                          clone.querySelector(".mdc-list-item__primary-text").textContent = record["sr_number"];
+                          clone.querySelector(".mdc-list-item__secondary-text").textContent = record["street_address"];
+                          
+                          let iconName = categoryIcons[node.id];
+                          clone.querySelector(".material-icons").textContent = iconName;
+                          
+                          document.querySelector("div#data ul.mdc-list").appendChild(clone);
+                      }
+                     
+                  })
+              });
+                
+            });
+
+    </script>
+</body>
+
+</html>
