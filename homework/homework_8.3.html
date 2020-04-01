@@ -35,7 +35,7 @@
         let buttonRef = document.querySelector("button");
      
         
-        buttonRef.onclick = () => { 
+        buttonRef.addEventListener("click", () => { 
             let inputStr = inputRef.value;
             console.log(inputStr);
             inputRef.value='';
@@ -54,7 +54,7 @@
             newButton.addEventListener("click", () => {
                 newLi.remove();
             })
-        };
+        });
 
         
         //buttonRef.onclick = function () { alert('hello!'); };
